@@ -1,0 +1,64 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* ✅ stop full-page scroll */
+  font-family: Arial, sans-serif;
+}
+
+/* ✅ Left sidebar stays fixed/static */
+.sidebar {
+  width: 220px;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+  flex-shrink: 0;
+
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+
+.logo {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px;
+  margin-bottom: 8px;
+  color: #cbd5e1;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: #1e293b;
+  color: white;
+}
+
+/* ✅ Only right side scrolls */
+.content {
+  flex: 1;
+  background: #f1f5f9;
+
+  height: 100vh;
+  overflow-y: auto; /* ✅ scroll only this */
+}
+
+/* ✅ Keep topbar fixed while content scrolls */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  padding: 15px 25px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.page {
+  padding: 25px;
+}

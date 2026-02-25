@@ -1,0 +1,82 @@
+.header {
+  margin-bottom: 18px;
+}
+
+.sub {
+  color: #64748b;
+  margin-top: 6px;
+}
+
+.table-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f8fafc;
+}
+
+th, td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+}
+
+.actions {
+  text-align: right;
+  width: 140px;
+}
+
+.plink {
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.pid {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.critical { background: #fee2e2; color: #991b1b; }
+.monitor { background: #fef9c3; color: #854d0e; }
+
+.status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.open { background: #dbeafe; color: #1d4ed8; }
+.resolved { background: #dcfce7; color: #166534; }
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #0f172a;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}

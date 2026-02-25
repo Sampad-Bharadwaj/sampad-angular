@@ -1,0 +1,56 @@
+<div class="header">
+  <h2>Alerts</h2>
+  <p class="sub">Track critical patient vitals & take action</p>
+</div>
+
+<div class="table-card" *ngIf="alerts$ | async as alerts">
+  <table>
+    <thead>
+      <tr>
+        <th>Patient</th>
+        <th>Alert Type</th>
+        <th>Severity</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th class="actions">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let a of alerts">
+        <td>
+          <a class="plink" [routerLink]="['/patients', a.patientId]">{{ a.patientName }}</a>
+          <div class="pid">MP-{{ a.patientId }}</div>
+        </td>
+
+        <td>{{ a.type }}</td>
+
+        <td>
+          <span [class]="badgeClass(a.severity)">{{ a.severity }}</span>
+        </td>
+
+        <td>{{ a.createdAt }}</td>
+
+        <td>
+          <span [class]="statusClass(a.status)">{{ a.status }}</span>
+        </td>
+
+        <td class="actions">
+          <button
+            class="btn"
+            (click)="resolve(a.id)"
+            [disabled]="a.status === 'Resolved'"
+          >
+            Resolve
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="alerts.length === 0">
+        <td colspan="6" style="padding: 18px; text-align: center; color: #64748b;">
+          No alerts available.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

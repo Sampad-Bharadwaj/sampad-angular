@@ -1,0 +1,21 @@
+<div class="layout">
+  <aside class="sidebar">
+    <h2 class="logo">MediPulse</h2>
+
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/patients" routerLinkActive="active">Patients</a>
+      <a routerLink="/alerts" routerLinkActive="active">Alerts</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <h1>Healthcare Monitoring System</h1>
+    </header>
+
+    <section class="page">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>

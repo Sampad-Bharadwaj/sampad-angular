@@ -1,0 +1,157 @@
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <div class="dash-header">
+    <div class="dash-title-wrap">
+      <h1 class="dash-title">Dashboard</h1>
+      <div class="dash-sub">
+        Healthcare Monitoring Summary • {{ today | date:'fullDate' }}
+      </div>
+    </div>
+
+    <div class="dash-actions">
+      <a class="btn btn-primary" routerLink="/patients">View Patients</a>
+      <a class="btn btn-ghost" routerLink="/alerts">View Alerts</a>
+    </div>
+  </div>
+
+  <!-- KPI GRID -->
+  <div class="kpi-grid">
+    <div
+      class="kpi-card"
+      *ngFor="let k of kpis; trackBy: trackByIndex"
+      [ngClass]="k.tone"
+    >
+      <div class="kpi-top">
+        <div class="kpi-ico">{{ k.icon }}</div>
+        <div class="kpi-title">{{ k.title }}</div>
+      </div>
+
+      <div class="kpi-value">{{ k.value }}</div>
+      <div class="kpi-sub">{{ k.sub }}</div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="dash-grid">
+
+    <!-- RECENT ACTIVITY -->
+    <section class="card">
+      <div class="card-head">
+        <h2>Recent Activity</h2>
+        <span class="muted">Last {{ activities.length }} updates</span>
+      </div>
+
+      <ul class="timeline">
+        <li class="timeline-item" *ngFor="let a of activities; trackBy: trackByIndex">
+          <span class="dot" [ngClass]="a.tone"></span>
+
+          <div class="timeline-body">
+            <div class="timeline-line">
+              <span class="timeline-text">{{ a.text }}</span>
+              <span class="timeline-time">{{ a.time }}</span>
+            </div>
+            <div class="timeline-meta" *ngIf="a.meta">{{ a.meta }}</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- CRITICAL PATIENTS -->
+    <section class="card">
+      <div class="card-head">
+        <h2>Critical Patients</h2>
+        <a class="link" routerLink="/patients">See all</a>
+      </div>
+
+      <div class="table">
+        <div class="row head">
+          <div>Patient</div>
+          <div>Last Visit</div>
+          <div>Risk</div>
+          <div class="right">Action</div>
+        </div>
+
+        <div class="row" *ngFor="let p of criticalPatients; trackBy: trackByIndex">
+          <div class="patient">
+            <div class="avatar">{{ p.name[0] }}</div>
+            <div class="p-meta">
+              <div class="p-name">{{ p.name }}</div>
+              <div class="p-id">ID: {{ p.code }} • {{ p.age }} • {{ p.gender }}</div>
+            </div>
+          </div>
+
+          <div class="mono">{{ p.lastVisit }}</div>
+
+          <div>
+            <span class="pill" [ngClass]="getRiskClass(p.risk)">{{ p.risk }}</span>
+          </div>
+
+          <div class="right">
+            <a class="btn btn-mini" [routerLink]="['/patients', p.id]">View</a>
+          </div>
+        </div>
+
+        <div class="empty" *ngIf="criticalPatients.length === 0">
+          ✅ No critical patients right now.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TODAY AT A GLANCE -->
+  <section class="card">
+    <div class="card-head">
+      <h2>Today at a Glance</h2>
+      <span class="muted">Quick operational snapshot</span>
+    </div>
+
+    <div class="mini-grid">
+      <div class="mini">
+        <div class="mini-label">OPD</div>
+        <div class="mini-val">{{ todayStats.opd }}</div>
+      </div>
+
+      <div class="mini">
+        <div class="mini-label">IPD</div>
+        <div class="mini-val">{{ todayStats.ipd }}</div>
+      </div>
+
+      <div class="mini">
+        <div class="mini-label">Reports Uploaded</div>
+        <div class="mini-val">{{ todayStats.reportsUploaded }}</div>
+      </div>
+
+      <div class="mini">
+        <div class="mini-label">Resolved Alerts</div>
+        <div class="mini-val">{{ todayStats.resolvedAlerts }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISK SUMMARY STRIP -->
+  <section class="card">
+    <div class="card-head">
+      <h2>Risk Summary</h2>
+      <span class="muted">Distribution across all patients</span>
+    </div>
+
+    <div class="risk-strip">
+      <div class="risk-chip critical">
+        <span class="label">Critical</span>
+        <span class="val">{{ riskCounts.critical }}</span>
+      </div>
+
+      <div class="risk-chip monitor">
+        <span class="label">Monitor</span>
+        <span class="val">{{ riskCounts.monitor }}</span>
+      </div>
+
+      <div class="risk-chip normal">
+        <span class="label">Normal</span>
+        <span class="val">{{ riskCounts.normal }}</span>
+      </div>
+    </div>
+  </section>
+
+</div>

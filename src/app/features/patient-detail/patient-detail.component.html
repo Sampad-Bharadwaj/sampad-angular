@@ -1,0 +1,65 @@
+<div *ngIf="patient; else notFound" class="profile">
+  <div class="profile-header">
+    <div>
+      <h2>{{ patient.name }}</h2>
+      <p class="meta">
+        Age: {{ patient.age }} • Gender: {{ patient.gender }} • Last Visit: {{ patient.lastVisit }}
+      </p>
+    </div>
+    <span [class]="badgeClass(patient.risk)">{{ patient.risk }}</span>
+  </div>
+
+  <div class="grid">
+    <div class="card chart-card">
+      <h3>Blood Pressure Trend</h3>
+      <div class="chart-wrap">
+        <canvas #bpCanvas></canvas>
+      </div>
+    </div>
+
+    <div class="card chart-card">
+      <h3>SpO2 + Pulse Trend</h3>
+      <div class="chart-wrap">
+        <canvas #spo2Canvas></canvas>
+      </div>
+    </div>
+
+    <div class="card chart-card full">
+      <h3>Blood Sugar Trend</h3>
+      <div class="chart-wrap">
+        <canvas #sugarCanvas></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Recent Vitals</h3>
+    <table class="vitals-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>BP</th>
+          <th>SpO2</th>
+          <th>Pulse</th>
+          <th>Sugar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of vitals">
+          <td>{{ v.date }}</td>
+          <td>{{ v.bpSys }}/{{ v.bpDia }}</td>
+          <td>{{ v.spo2 }}%</td>
+          <td>{{ v.pulse }}</td>
+          <td>{{ v.sugar }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="card">
+    <h2>Patient not found</h2>
+    <p>Invalid patient id: {{ patientId }}</p>
+  </div>
+</ng-template>

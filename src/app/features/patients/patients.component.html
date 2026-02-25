@@ -1,0 +1,62 @@
+<div class="header">
+  <div class="left">
+    <h2>Patients</h2>
+    <span class="count">{{ filteredPatients.length }} Patients</span>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔎</span>
+    <input
+      class="search"
+      type="text"
+      placeholder="Search by name / risk / gender / date..."
+      [(ngModel)]="search"
+    />
+  </div>
+</div>
+
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Patient</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Last Visit</th>
+        <th>Risk</th>
+        <th class="actions">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of filteredPatients" class="row">
+        <td class="patient-cell">
+          <div class="avatar">{{ p.name[0] }}</div>
+          <div class="meta">
+            <div class="name">{{ p.name }}</div>
+            <div class="sub">ID: MP-{{ p.id }}</div>
+          </div>
+        </td>
+
+        <td>{{ p.age }}</td>
+        <td>{{ p.gender }}</td>
+        <td>{{ p.lastVisit }}</td>
+
+        <td>
+          <span [class]="badgeClass(p.risk)">{{ p.risk }}</span>
+        </td>
+
+        <td class="actions">
+          <a class="view" [routerLink]="['/patients', p.id]">View</a>
+        </td>
+      </tr>
+
+      <!-- Empty state -->
+      <tr *ngIf="filteredPatients.length === 0">
+        <td class="empty" colspan="6">
+          No patients found for "<b>{{ search }}</b>"
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
